@@ -7,23 +7,23 @@ require 'temporalio/client'
 require 'temporalio/worker'
 require 'temporalio/runtime'
 
-Temporalio::Runtime.default = Temporalio::Runtime.new(
-  telemetry: Temporalio::Runtime::TelemetryOptions.new(
-    metrics: Temporalio::Runtime::MetricsOptions.new(
-      metric_prefix: 'temporal.',
-      global_tags: { service: 'temporal-worker', env: ENV.fetch('DD_ENV', 'prod') },
-      opentelemetry: Temporalio::Runtime::OpenTelemetryMetricsOptions.new(
-        # gRPC (preferred):
-        url: 'http://datadog.infrastructure.svc.cluster.local:4317',
-        # or HTTP:
-        # http: true,
-        # url: 'http://datadog.infrastructure.svc.cluster.local:4318/v1/metrics',
-        # Datadog works best (and agentless requires) DELTA temporality:
-        metric_temporality: Temporalio::Runtime::OpenTelemetryMetricsOptions::MetricTemporality::DELTA
-      )
-    )
-  )
-)
+# Temporalio::Runtime.default = Temporalio::Runtime.new(
+#   telemetry: Temporalio::Runtime::TelemetryOptions.new(
+#     metrics: Temporalio::Runtime::MetricsOptions.new(
+#       metric_prefix: 'temporal.',
+#       global_tags: { service: 'temporal-worker', env: ENV.fetch('DD_ENV', 'prod') },
+#       opentelemetry: Temporalio::Runtime::OpenTelemetryMetricsOptions.new(
+#         # gRPC (preferred):
+#         url: 'http://datadog.infrastructure.svc.cluster.local:4317',
+#         # or HTTP:
+#         # http: true,
+#         # url: 'http://datadog.infrastructure.svc.cluster.local:4318/v1/metrics',
+#         # Datadog works best (and agentless requires) DELTA temporality:
+#         metric_temporality: Temporalio::Runtime::OpenTelemetryMetricsOptions::MetricTemporality::DELTA
+#       )
+#     )
+#   )
+# )
 # Create a Temporal client
 client = Temporalio::Client.connect(
   'localhost:7233',

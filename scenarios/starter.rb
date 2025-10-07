@@ -7,7 +7,7 @@ require_relative 'my_workflow'
 client = Temporalio::Client.connect('localhost:7233', 'default')
 
 workflow_id = 'activity-heartbeating-workflow-id'
-task_queue = 'activity-heartbeating-sample'
+task_queue = 'scenarios'
 
 # Start workflow
 puts 'Starting workflow'
